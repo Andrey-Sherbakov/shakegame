@@ -38,4 +38,10 @@ public:
 
 	void CreateSnakeActor();
 
+	UFUNCTION()
+	void HandlePlayerVerticalInput(float value);
+
+	UFUNCTION()
+	void HandlePlayerHorizontalInput(float value);
+
 };
