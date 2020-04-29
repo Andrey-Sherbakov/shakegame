@@ -32,6 +32,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION(BlueprintCallable)
-		void AddFoodElement(int ElementsNum = 1);
+		void AddFoodElement();
 
 };

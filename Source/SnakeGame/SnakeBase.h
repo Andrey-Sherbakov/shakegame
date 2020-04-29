@@ -7,6 +7,7 @@
 #include "SnakeBase.generated.h"
 
 class ASnakeElementBase;
+class AFood;
 
 UENUM()
 enum class EMovementDirection
@@ -29,6 +30,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<ASnakeElementBase> SnakeElementClass;
 
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<AFood> FoodClass;
+
 	UPROPERTY()
 		TArray<ASnakeElementBase*> SnakeElements;
 
@@ -50,6 +54,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION(BlueprintCallable)
 	void AddSnakeElement(int ElementsNum = 1);
+	UFUNCTION(BlueprintCallable)
+	void AddFoodElement();
 	UFUNCTION(BlueprintCallable)
 	void Move();
 	UFUNCTION()

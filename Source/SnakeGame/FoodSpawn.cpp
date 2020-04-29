@@ -29,7 +29,7 @@ void AFoodSpawn::Tick(float DeltaTime)
 
 }
 
-void AFoodSpawn::AddFoodElement(int ElementsNum /*= 1*/)
+void AFoodSpawn::AddFoodElement()
 {
 	srand(time(NULL));
 	int x = -450 + (rand() % 90)*10;

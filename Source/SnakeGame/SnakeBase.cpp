@@ -4,7 +4,9 @@
 #include "SnakeBase.h"
 #include "SnakeElementBase.h"
 #include "Interactable.h"
+#include "Food.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
+#include <ctime>
 
 // Sets default values
 ASnakeBase::ASnakeBase()
@@ -22,6 +24,7 @@ void ASnakeBase::BeginPlay()
 	Super::BeginPlay();
 	SetActorTickInterval(MovementSpeed);
 	AddSnakeElement(4);
+	AddFoodElement();
 }
 
 // Called every frame
@@ -46,6 +49,16 @@ void ASnakeBase::AddSnakeElement(int ElementsNum)
 			NewSnakeElem->SetFirstElementType();
 		}
 	}
+}
+
+void ASnakeBase::AddFoodElement()
+{
+	srand(time(NULL));
+	int x = -450 + (rand() % 90) * 10;
+	int y = -850 + (rand() % 170) * 10;
+	FVector NewLocation(x, y, 0);
+	FTransform NewTransform(NewLocation);
+	AFood* NewFoodElem = GetWorld()->SpawnActor<AFood>(FoodClass, NewTransform);
 }
 
 void ASnakeBase::Move()
