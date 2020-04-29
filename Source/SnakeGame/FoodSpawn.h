@@ -33,8 +33,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	UFUNCTION(BlueprintCallable)
 		void AddFoodElement(int ElementsNum = 1);
-	UFUNCTION(BlueprintCallable)
-		void SnakeAteElement();
-	virtual void Interact(AActor* Interactor, bool bIsHead) override;
 
 };

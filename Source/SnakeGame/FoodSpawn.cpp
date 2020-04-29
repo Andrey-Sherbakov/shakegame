@@ -4,6 +4,7 @@
 #include "FoodSpawn.h"
 #include "Food.h"
 #include <ctime>
+#include "SnakeBase.h"
 
 // Sets default values
 AFoodSpawn::AFoodSpawn()
@@ -18,8 +19,6 @@ void AFoodSpawn::BeginPlay()
 {
 	Super::BeginPlay();
 	AddFoodElement();
-	AddFoodElement();
-	AddFoodElement();
 	
 }
 
@@ -33,21 +32,13 @@ void AFoodSpawn::Tick(float DeltaTime)
 void AFoodSpawn::AddFoodElement(int ElementsNum /*= 1*/)
 {
 	srand(time(NULL));
-	int x = -450 + rand() % 900;
-	int y = -850 + rand() % 1700;
+	int x = -450 + (rand() % 90)*10;
+	int y = -850 + (rand() % 170)*10;
 	FVector NewLocation(x, y, 0);
 	FTransform NewTransform(NewLocation);
 	AFood* NewFoodElem = GetWorld()->SpawnActor<AFood>(FoodClass, NewTransform);
 	
 }
 
-void AFoodSpawn::SnakeAteElement()
-{
-	
-}
 
-void AFoodSpawn::Interact(AActor* Interactor, bool bIsHead)
-{
-
-}
 
