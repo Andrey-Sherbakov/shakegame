@@ -29,16 +29,16 @@ void AFood::Tick(float DeltaTime)
 
 }
 
+
+
 void AFood::Interact(AActor* Interactor, bool bIsHead)
 {
 	auto Snake = Cast<ASnakeBase>(Interactor);
-	auto FoodSpawn = Cast<AFoodSpawn>(Interactor);
 	if (bIsHead)
 	{
 		if (IsValid(Snake))
 		{
 			Snake->AddSnakeElement();
-			FoodSpawn->AddFoodElement();
 			Destroy();
 		}
 	}
