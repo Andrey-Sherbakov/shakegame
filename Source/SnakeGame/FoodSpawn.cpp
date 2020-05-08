@@ -32,8 +32,8 @@ void AFoodSpawn::Tick(float DeltaTime)
 void AFoodSpawn::AddFoodElement()
 {
 	srand(time(NULL));
-	int x = -450 + (rand() % 90)*10;
-	int y = -850 + (rand() % 170)*10;
+	int x = -450 + (rand() % 9) * 100;
+	int y = -850 + (rand() % 17) * 100;
 	FVector NewLocation(x, y, 0);
 	FTransform NewTransform(NewLocation);
 	AFood* NewFoodElem = GetWorld()->SpawnActor<AFood>(FoodClass, NewTransform);

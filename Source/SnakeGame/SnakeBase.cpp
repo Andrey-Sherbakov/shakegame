@@ -5,6 +5,7 @@
 #include "SnakeElementBase.h"
 #include "Interactable.h"
 #include "Food.h"
+#include "BonusUpSpeed.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
 #include <ctime>
 
@@ -25,6 +26,7 @@ void ASnakeBase::BeginPlay()
 	SetActorTickInterval(MovementSpeed);
 	AddSnakeElement(4);
 	AddFoodElement();
+	GetWorld()->GetTimerManager().SetTimer(BonusTimerHandle, this, &ASnakeBase::AddBonus, 5.0f, true, 5.0f);
 }
 
 // Called every frame
@@ -54,8 +56,8 @@ void ASnakeBase::AddSnakeElement(int ElementsNum)
 void ASnakeBase::AddFoodElement()
 {
 	srand(time(NULL));
-	int x = -450 + (rand() % 90) * 10;
-	int y = -850 + (rand() % 170) * 10;
+	int x = -450 + (rand() % 9) * 100;
+	int y = -850 + (rand() % 17) * 100;
 	FVector NewLocation(x, y, 0);
 	FTransform NewTransform(NewLocation);
 	AFood* NewFoodElem = GetWorld()->SpawnActor<AFood>(FoodClass, NewTransform);
@@ -64,21 +66,20 @@ void ASnakeBase::AddFoodElement()
 void ASnakeBase::Move()
 {
 	FVector MovementVector(ForceInitToZero);
-	MovementSpeed = ElementSize;
 
 	switch (LastMovementDirection)
 	{
 	case EMovementDirection::UP:
-		MovementVector.X += MovementSpeed;
+		MovementVector.X += ElementSize;
 		break;
 	case EMovementDirection::DOWN:
-		MovementVector.X -= MovementSpeed;
+		MovementVector.X -= ElementSize;
 		break;
 	case EMovementDirection::LEFT:
-		MovementVector.Y += MovementSpeed;
+		MovementVector.Y += ElementSize;
 		break;
 	case EMovementDirection::RIGHT:
-		MovementVector.Y -= MovementSpeed;
+		MovementVector.Y -= ElementSize;
 		break;
 	}
 
@@ -112,5 +113,27 @@ void ASnakeBase::SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActo
 			InteractableInterface->Interact(this, bIsFirst);
 		}
 	}
+}
+
+void ASnakeBase::IncreaseSpeed()
+{
+	MovementSpeed = MovementSpeed - 0.01;
+	SetActorTickInterval(MovementSpeed);
+}
+
+void ASnakeBase::DecreaseSpeed()
+{
+	auto a = GetActorTickInterval() + 0.1;
+	SetActorTickInterval(a);
+}
+
+void ASnakeBase::AddBonus()
+{
+	srand(time(NULL));
+	int x = -450 + (rand() % 9) * 100;
+	int y = -850 + (rand() % 17) * 100;
+	FVector NewLocation(x, y, 0);
+	FTransform NewTransform(NewLocation);
+	ABonusUpSpeed* NewBonus = GetWorld()->SpawnActor<ABonusUpSpeed>(BonusUpSpeedClass, NewTransform);
 }
 

@@ -8,6 +8,7 @@
 
 class ASnakeElementBase;
 class AFood;
+class ABonusUpSpeed;
 
 UENUM()
 enum class EMovementDirection
@@ -27,11 +28,17 @@ public:
 	// Sets default values for this actor's properties
 	ASnakeBase();
 
+	UPROPERTY()
+		FTimerHandle BonusTimerHandle;
+
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<ASnakeElementBase> SnakeElementClass;
 
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<AFood> FoodClass;
+
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<ABonusUpSpeed> BonusUpSpeedClass;
 
 	UPROPERTY()
 		TArray<ASnakeElementBase*> SnakeElements;
@@ -60,6 +67,12 @@ public:
 	void Move();
 	UFUNCTION()
 	void SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActor* Other);
+	UFUNCTION()
+	void IncreaseSpeed();
+	UFUNCTION()
+	void DecreaseSpeed();
+	UFUNCTION()
+	void AddBonus();
 
 
 };
