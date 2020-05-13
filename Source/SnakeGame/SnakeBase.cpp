@@ -26,7 +26,7 @@ void ASnakeBase::BeginPlay()
 	SetActorTickInterval(MovementSpeed);
 	AddSnakeElement(4);
 	AddFoodElement();
-	GetWorld()->GetTimerManager().SetTimer(BonusTimerHandle, this, &ASnakeBase::AddBonus, 5.0f, true, 5.0f);
+	GetWorld()->GetTimerManager().SetTimer(BonusTimerHandle, this, &ASnakeBase::AddBonus, 15.0f, true, 15.0f);
 }
 
 // Called every frame
@@ -123,12 +123,13 @@ void ASnakeBase::IncreaseSpeed()
 
 void ASnakeBase::DecreaseSpeed()
 {
-	auto a = GetActorTickInterval() + 0.1;
-	SetActorTickInterval(a);
+	MovementSpeed = MovementSpeed + 0.01;
+	SetActorTickInterval(MovementSpeed);
 }
 
 void ASnakeBase::AddBonus()
 {
+	int RandomBonus = rand() % 1;
 	srand(time(NULL));
 	int x = -450 + (rand() % 9) * 100;
 	int y = -850 + (rand() % 17) * 100;

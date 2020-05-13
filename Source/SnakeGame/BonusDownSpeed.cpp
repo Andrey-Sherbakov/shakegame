@@ -2,6 +2,7 @@
 
 
 #include "BonusDownSpeed.h"
+#include "SnakeBase.h"
 
 // Sets default values
 ABonusDownSpeed::ABonusDownSpeed()
@@ -15,7 +16,7 @@ ABonusDownSpeed::ABonusDownSpeed()
 void ABonusDownSpeed::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	GetWorld()->GetTimerManager().SetTimer(DestroyActorTimerHandle, this, &ABonusDownSpeed::DestroyActor, 10.0f, false);
 }
 
 // Called every frame
@@ -23,5 +24,23 @@ void ABonusDownSpeed::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ABonusDownSpeed::Interact(AActor* Interactor, bool bIsHead)
+{
+	auto Snake = Cast<ASnakeBase>(Interactor);
+	if (bIsHead)
+	{
+		if (IsValid(Snake))
+		{
+			Snake->DecreaseSpeed();
+			Destroy();
+		}
+	}
+}
+
+void ABonusDownSpeed::DestroyActor()
+{
+	Destroy();
 }
 

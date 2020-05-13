@@ -5,6 +5,7 @@
 #include "SnakeBase.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
 #include "FoodSpawn.h"
+#include "SnakeGameGameModeBase.h"
 
 // Sets default values
 AFood::AFood()
@@ -40,6 +41,8 @@ void AFood::Interact(AActor* Interactor, bool bIsHead)
 		{
 			Snake->AddSnakeElement();
 			Snake->AddFoodElement();
+			GetWorld()->GetAuthGameMode()->
+			
 			Destroy();
 		}
 	}

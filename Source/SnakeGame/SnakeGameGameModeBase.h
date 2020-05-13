@@ -6,6 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "SnakeGameGameModeBase.generated.h"
 
+class AFoodSpawn;
+
 /**
  * 
  */
@@ -13,5 +15,7 @@ UCLASS()
 class SNAKEGAME_API ASnakeGameGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+public:
+	UPROPERTY()
+	AActor* FoodSpawn;
 };

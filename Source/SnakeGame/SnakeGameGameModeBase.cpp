@@ -2,4 +2,6 @@
 
 
 #include "SnakeGameGameModeBase.h"
+#include "FoodSpawn.h"
 
+AActor* FoodSpawn = &AFoodSpawn;
