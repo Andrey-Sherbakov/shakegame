@@ -4,6 +4,7 @@
 #include "Food.h"
 #include "SnakeBase.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "FoodSpawn.h"
 #include "SnakeGameGameModeBase.h"
 
@@ -41,7 +42,8 @@ void AFood::Interact(AActor* Interactor, bool bIsHead)
 		{
 			Snake->AddSnakeElement();
 			Snake->AddFoodElement();
-			GetWorld()->GetAuthGameMode()->
+			ASnakeGameGameModeBase* game_mode = Cast<ASnakeGameGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+			game_mode->FoodSpawn->AddFood
 			
 			Destroy();
 		}

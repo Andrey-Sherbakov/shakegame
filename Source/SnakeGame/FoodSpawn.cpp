@@ -4,6 +4,8 @@
 #include "FoodSpawn.h"
 #include "Food.h"
 #include <ctime>
+#include "SnakeGameGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 #include "SnakeBase.h"
 
 // Sets default values
@@ -19,6 +21,12 @@ void AFoodSpawn::BeginPlay()
 {
 	Super::BeginPlay();
 	AddFoodElement();
+
+	ASnakeGameGameModeBase* game_mode = Cast<ASnakeGameGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+	if (game_mode)
+	{
+		game_mode->FoodSpawn = this;
+	}
 	
 }
 
