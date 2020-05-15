@@ -4,24 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "FoodSpawn.generated.h"
-
-class AFood;
+#include "Interactable.h"
+#include "DoobleFood.generated.h"
 
 UCLASS()
-class SNAKEGAME_API AFoodSpawn : public AActor
+class SNAKEGAME_API ADoobleFood : public AActor, public IInteractable
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AFoodSpawn();
-
-	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<AFood> FoodClass;
-
+	ADoobleFood();
 	UPROPERTY()
-		TArray<AFood*> FoodElements;
+		FTimerHandle DestroyActorTimerHandle;
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,7 +26,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintCallable)
-		void AddFoodElement();
-
+	virtual void Interact(AActor* Interactor, bool bIsHead) override;
+	void DestroyActor();
 };

@@ -16,6 +16,12 @@ class SNAKEGAME_API ASnakeGameGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 Scores;
 	UPROPERTY()
-	AActor* FoodSpawn;
+	AFoodSpawn* FoodSpawn;
+protected:
+	virtual void BeginPlay() override;
+public:
+	virtual void Tick(float DeltaTime) override;
 };

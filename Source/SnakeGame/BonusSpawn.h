@@ -4,24 +4,32 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "FoodSpawn.generated.h"
+#include "BonusSpawn.generated.h"
 
-class AFood;
+class ABonusUpSpeed;
+class ABonusDownSpeed;
+class ADoobleFood;
 
 UCLASS()
-class SNAKEGAME_API AFoodSpawn : public AActor
+class SNAKEGAME_API ABonusSpawn : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AFoodSpawn();
-
-	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<AFood> FoodClass;
+	ABonusSpawn();
 
 	UPROPERTY()
-		TArray<AFood*> FoodElements;
+		FTimerHandle BonusTimerHandle;
+
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<ABonusUpSpeed> BonusUpSpeedClass;
+
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<ABonusDownSpeed> BonusDownSpeedClass;
+
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<ADoobleFood> DoubleFoodClass;
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,6 +40,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-		void AddFoodElement();
+		void AddBonus();
 
 };

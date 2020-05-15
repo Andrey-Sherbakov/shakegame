@@ -4,8 +4,6 @@
 #include "SnakeBase.h"
 #include "SnakeElementBase.h"
 #include "Interactable.h"
-#include "Food.h"
-#include "BonusUpSpeed.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
 #include <ctime>
 
@@ -25,8 +23,6 @@ void ASnakeBase::BeginPlay()
 	Super::BeginPlay();
 	SetActorTickInterval(MovementSpeed);
 	AddSnakeElement(4);
-	AddFoodElement();
-	GetWorld()->GetTimerManager().SetTimer(BonusTimerHandle, this, &ASnakeBase::AddBonus, 15.0f, true, 15.0f);
 }
 
 // Called every frame
@@ -53,15 +49,6 @@ void ASnakeBase::AddSnakeElement(int ElementsNum)
 	}
 }
 
-void ASnakeBase::AddFoodElement()
-{
-	srand(time(NULL));
-	int x = -450 + (rand() % 9) * 100;
-	int y = -850 + (rand() % 17) * 100;
-	FVector NewLocation(x, y, 0);
-	FTransform NewTransform(NewLocation);
-	AFood* NewFoodElem = GetWorld()->SpawnActor<AFood>(FoodClass, NewTransform);
-}
 
 void ASnakeBase::Move()
 {
@@ -126,15 +113,3 @@ void ASnakeBase::DecreaseSpeed()
 	MovementSpeed = MovementSpeed + 0.01;
 	SetActorTickInterval(MovementSpeed);
 }
-
-void ASnakeBase::AddBonus()
-{
-	int RandomBonus = rand() % 1;
-	srand(time(NULL));
-	int x = -450 + (rand() % 9) * 100;
-	int y = -850 + (rand() % 17) * 100;
-	FVector NewLocation(x, y, 0);
-	FTransform NewTransform(NewLocation);
-	ABonusUpSpeed* NewBonus = GetWorld()->SpawnActor<ABonusUpSpeed>(BonusUpSpeedClass, NewTransform);
-}
-

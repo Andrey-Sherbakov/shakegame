@@ -41,9 +41,9 @@ void AFood::Interact(AActor* Interactor, bool bIsHead)
 		if (IsValid(Snake))
 		{
 			Snake->AddSnakeElement();
-			Snake->AddFoodElement();
 			ASnakeGameGameModeBase* game_mode = Cast<ASnakeGameGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
-			game_mode->FoodSpawn->AddFood
+			game_mode->FoodSpawn->AddFoodElement();
+			game_mode->Scores = game_mode->Scores + 10;
 			
 			Destroy();
 		}

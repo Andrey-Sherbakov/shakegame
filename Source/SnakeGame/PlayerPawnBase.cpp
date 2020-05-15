@@ -4,6 +4,8 @@
 #include "PlayerPawnBase.h"
 #include "Engine/Classes/Camera/CameraComponent.h"
 #include "SnakeBase.h"
+#include "FoodSpawn.h"
+#include "BonusSpawn.h"
 #include "Components/InputComponent.h"
 
 // Sets default values
@@ -22,6 +24,8 @@ void APlayerPawnBase::BeginPlay()
 	Super::BeginPlay();
 	SetActorRotation(FRotator(-90, 0, 0));
 	CreateSnakeActor();
+	CreateFoodSpawnActor();
+	CreateBonusSpawnActor();
 	
 }
 
@@ -43,6 +47,16 @@ void APlayerPawnBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 void APlayerPawnBase::CreateSnakeActor()
 {
 	SnakeActor = GetWorld()->SpawnActor<ASnakeBase>(SnakeActorClass, FTransform());
+}
+
+void APlayerPawnBase::CreateFoodSpawnActor()
+{
+	FoodSpawnActor = GetWorld()->SpawnActor<AFoodSpawn>(FoodSpawnClass, FTransform());
+}
+
+void APlayerPawnBase::CreateBonusSpawnActor()
+{
+	BonusSpawnActor = GetWorld()->SpawnActor<ABonusSpawn>(BonusSpawnClass, FTransform());
 }
 
 void APlayerPawnBase::HandlePlayerVerticalInput(float value)
