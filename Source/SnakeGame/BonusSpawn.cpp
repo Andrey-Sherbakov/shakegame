@@ -5,6 +5,8 @@
 #include "BonusUpSpeed.h"
 #include "BonusDownSpeed.h"
 #include "DoobleFood.h"
+#include "SnakeGameInstance.h"
+#include "Kismet/GameplayStatics.h"
 #include <ctime>
 #include "SnakeBase.h"
 
@@ -33,9 +35,29 @@ void ABonusSpawn::Tick(float DeltaTime)
 void ABonusSpawn::AddBonus()
 {
 	srand(time(NULL));
+	USnakeGameInstance* game_instance = Cast<USnakeGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+	int32 Scores = game_instance->Scores;
 	int RandomBonus = rand() % 3;
 	int x = -440 + (rand() % 16) * 55;
 	int y = -825 + (rand() % 30) * 55;
+	if (Scores <= 15 && Scores >= 5)
+	{
+		if (x == -275 || x == 275)
+		{
+			x = x + 55;
+		}
+	}
+	if (Scores >= 15)
+	{
+		if (x == -275 || x == 275)
+		{
+			x = x + 55;
+		}
+		if (y == -770 || y == 770)
+		{
+			y = y + 55;
+		}
+	}
 	FVector NewLocation(x, y, 0);
 	FTransform NewTransform(NewLocation);
 	if (RandomBonus == 0)

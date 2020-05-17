@@ -39,7 +39,7 @@ void ADoobleFood::Interact(AActor* Interactor, bool bIsHead)
 			Snake->AddSnakeElement();
 			Snake->AddSnakeElement();
 			USnakeGameInstance* game_instance = Cast<USnakeGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-			game_instance->Scores = game_instance->Scores + 2;
+			game_instance->Scores = game_instance->Scores + 1;
 
 			Destroy();
 		}
