@@ -20,8 +20,6 @@ void ASnakeElementBase::BeginPlay()
 {
 	Super::BeginPlay();
 	MeshComponent->SetVisibility(false);
-	
-	
 }
 
 // Called every frame

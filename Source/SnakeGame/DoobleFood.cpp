@@ -3,6 +3,8 @@
 
 #include "DoobleFood.h"
 #include "SnakeBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "SnakeGameInstance.h"
 
 // Sets default values
 ADoobleFood::ADoobleFood()
@@ -17,6 +19,7 @@ void ADoobleFood::BeginPlay()
 {
 	Super::BeginPlay();
 	GetWorld()->GetTimerManager().SetTimer(DestroyActorTimerHandle, this, &ADoobleFood::DestroyActor, 10.0f, false);
+
 }
 
 // Called every frame
@@ -35,6 +38,9 @@ void ADoobleFood::Interact(AActor* Interactor, bool bIsHead)
 		{
 			Snake->AddSnakeElement();
 			Snake->AddSnakeElement();
+			USnakeGameInstance* game_instance = Cast<USnakeGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
+			game_instance->Scores = game_instance->Scores + 2;
+
 			Destroy();
 		}
 	}

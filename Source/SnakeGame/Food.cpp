@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "FoodSpawn.h"
 #include "SnakeGameGameModeBase.h"
+#include "SnakeGameInstance.h"
 
 // Sets default values
 AFood::AFood()
@@ -42,8 +43,9 @@ void AFood::Interact(AActor* Interactor, bool bIsHead)
 		{
 			Snake->AddSnakeElement();
 			ASnakeGameGameModeBase* game_mode = Cast<ASnakeGameGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+			USnakeGameInstance* game_instance = Cast<USnakeGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 			game_mode->FoodSpawn->AddFoodElement();
-			game_mode->Scores = game_mode->Scores + 10;
+			game_instance->Scores = game_instance->Scores + 1;
 			
 			Destroy();
 		}

@@ -34,8 +34,8 @@ void ABonusSpawn::AddBonus()
 {
 	srand(time(NULL));
 	int RandomBonus = rand() % 3;
-	int x = -450 + (rand() % 9) * 100;
-	int y = -850 + (rand() % 17) * 100;
+	int x = -440 + (rand() % 16) * 55;
+	int y = -825 + (rand() % 30) * 55;
 	FVector NewLocation(x, y, 0);
 	FTransform NewTransform(NewLocation);
 	if (RandomBonus == 0)
