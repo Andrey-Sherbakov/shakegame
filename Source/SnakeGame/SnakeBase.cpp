@@ -4,6 +4,8 @@
 #include "SnakeBase.h"
 #include "SnakeElementBase.h"
 #include "Interactable.h"
+#include "SnakeGameGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
 #include <ctime>
 
@@ -14,7 +16,7 @@ ASnakeBase::ASnakeBase()
 	PrimaryActorTick.bCanEverTick = true;
 	ElementSize = 100.f;
 	MovementSpeed = 10.f;
-	LastMovementDirection = EMovementDirection::DOWN;
+	LastMovementDirection = EMovementDirection::RIGHT;
 }
 
 // Called when the game starts or when spawned
@@ -30,7 +32,11 @@ void ASnakeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Move();
-
+	ASnakeGameGameModeBase* game_mode = Cast<ASnakeGameGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+	if (game_mode)
+	{
+		game_mode->Elements = SnakeElements;
+	}
 }
 
 void ASnakeBase::AddSnakeElement(int ElementsNum)

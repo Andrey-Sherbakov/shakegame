@@ -7,6 +7,7 @@
 #include "SnakeGameGameModeBase.generated.h"
 
 class AFoodSpawn;
+class ASnakeElementBase;
 
 /**
  * 
@@ -17,9 +18,9 @@ class SNAKEGAME_API ASnakeGameGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 public:
 	UPROPERTY()
-	AFoodSpawn* FoodSpawn;
-protected:
-	virtual void BeginPlay() override;
+		TArray<ASnakeElementBase*> Elements;
+	UPROPERTY()
+		AFoodSpawn* FoodSpawn;
 public:
 	virtual void Tick(float DeltaTime) override;
 };

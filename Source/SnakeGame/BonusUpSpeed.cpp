@@ -3,6 +3,8 @@
 
 #include "BonusUpSpeed.h"
 #include "SnakeBase.h"
+#include "SnakeGameInstance.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABonusUpSpeed::ABonusUpSpeed()
@@ -34,7 +36,9 @@ void ABonusUpSpeed::Interact(AActor* Interactor, bool bIsHead)
 	{
 		if (IsValid(Snake))
 		{
+			USnakeGameInstance* game_instance = Cast<USnakeGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 			Snake->IncreaseSpeed();
+			game_instance->Scores = game_instance->Scores + 5;
 			Destroy();
 		}
 	}

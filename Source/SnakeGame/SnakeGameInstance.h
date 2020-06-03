@@ -16,5 +16,5 @@ class SNAKEGAME_API USnakeGameInstance : public UGameInstance
 public:
 	USnakeGameInstance();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int32 Scores;
+	int32 Scores;
 };

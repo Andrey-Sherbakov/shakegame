@@ -41,18 +41,17 @@ void AFoodSpawn::Tick(float DeltaTime)
 void AFoodSpawn::AddFoodElement()
 {
 	srand(time(NULL));
-	USnakeGameInstance* game_instance = Cast<USnakeGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
-	int32 Scores = game_instance->Scores;
+	FString CurrentMap = UGameplayStatics::GetCurrentLevelName(GetWorld(), true);
 	int x = -440 + (rand() % 16) * 55;
 	int y = -825 + (rand() % 30) * 55;
-	if (Scores >= 5 && Scores <= 15)
+	if (CurrentMap == "Level2")
 	{
 		if (x == -275 || x == 275)
 		{
 			x = x + 55;
 		}
 	}
-	if (Scores >= 15)
+	if (CurrentMap == "Level3")
 	{
 		if (x == -275 || x == 275)
 		{
