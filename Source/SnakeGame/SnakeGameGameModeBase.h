@@ -17,7 +17,7 @@ class SNAKEGAME_API ASnakeGameGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite)
 		TArray<ASnakeElementBase*> Elements;
 	UPROPERTY()
 		AFoodSpawn* FoodSpawn;

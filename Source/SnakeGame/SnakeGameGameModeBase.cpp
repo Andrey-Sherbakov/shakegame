@@ -11,7 +11,7 @@ void ASnakeGameGameModeBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	FString CurrentMap = UGameplayStatics::GetCurrentLevelName(GetWorld(), true);
 	
-	if (Elements.Num() >= 10)
+	if (Elements.Num() >= 30)
 	{
 		if (CurrentMap == "Map")
 		{
