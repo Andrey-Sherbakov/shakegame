@@ -110,12 +110,18 @@ void ASnakeBase::SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActo
 
 void ASnakeBase::IncreaseSpeed()
 {
-	MovementSpeed = MovementSpeed - 0.01;
-	SetActorTickInterval(MovementSpeed);
+	if (MovementSpeed >= 0.05)
+	{
+		MovementSpeed = MovementSpeed - 0.01;
+		SetActorTickInterval(MovementSpeed);
+	}
 }
 
 void ASnakeBase::DecreaseSpeed()
 {
-	MovementSpeed = MovementSpeed + 0.01;
-	SetActorTickInterval(MovementSpeed);
+	if (MovementSpeed <= 0.2)
+	{
+		MovementSpeed = MovementSpeed + 0.01;
+		SetActorTickInterval(MovementSpeed);
+	}
 }
